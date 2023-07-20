@@ -10,10 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+#importing firebase
+import firebase_admin
+from firebase_admin import credentials,initialize_app
+
+# Firebase Admin SDK JSON path and data base reference
+cred = credentials.Certificate("firebase/authentication-d522f-firebase-adminsdk-kp5c3-58154fbaaf.json")
+
+# Initialize the Firebase Admin SDK
 BASE_DIR = Path(__file__).resolve().parent.parent
+initialize_app(cred,{"databaseURL": "https://authentication-d522f-default-rtdb.firebaseio.com/"}) 
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication'
+    #'authentication.apps.AuthenticationConfig',
+    #'rest_framework',
 ]
 
 MIDDLEWARE = [
